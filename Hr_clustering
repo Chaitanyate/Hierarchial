@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data=pd.read_csv("/home/chaitanya/chaitanya/ML/K_Means/K_Means/Mall_Customers.csv")
+#data
+x=data.iloc[:,[3,4]].values
+
+import scipy.cluster.hierarchy as hs
+dend=hs.dendrogram(hs.linkage(x,method="ward"))
+plt.plot()
+
+from sklearn.cluster import AgglomerativeClustering
+hc=AgglomerativeClustering(n_clusters=5,affinity="euclidean",linkage="ward")
+ymeans=hc.fit_predict(x)
+
+plt.scatter(x[ymeans==0,0],x[ymeans==0,1],s=100,c="red",label="lab1")
+#plt.scatter(x[ymeans == 0, 0],x[ymeans == 0, 1],s = 100, c = 'red', label = 'Cluster 1')
+
+plt.scatter(x[ymeans==1,0],x[ymeans==1,1],s=100,c="black",label="lab1")
+plt.scatter(x[ymeans==2,0],x[ymeans==2,1],s=100,c="blue",label="lab2")
+plt.scatter(x[ymeans==3,0],x[ymeans==3,1],s=100,c="green",label="lab3")
+plt.scatter(x[ymeans==4,0],x[ymeans==4,1],s=100,c="cyan",label="lab4")
+
+plt.legend()
+plt.show()
